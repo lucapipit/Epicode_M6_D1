@@ -7,6 +7,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Button from 'react-bootstrap/esm/Button';
+import {Spinner} from "react-bootstrap"
 
 const EditPostModal = ({ id }) => {
 
@@ -24,7 +25,21 @@ const EditPostModal = ({ id }) => {
     const text = singlePost.text;
     const author = singlePost.title;
 
+    const uploadFile = async (file) => {
+        const fileData = new FormData();
+        fileData.append("img", file);
 
+        try {
+            const apiUrl = `${process.env.REACT_APP_SERVERBASE_URL}/posts/internalUpload`;
+            const response = await fetch(apiUrl, {
+                method: "POST",
+                body: fileData
+            });
+            return await response.json();
+        } catch (error) {
+            console.error("file upload errors occured");
+        }
+    };
 
     const submitForm = async (e) => {
         e.preventDefault();
@@ -55,6 +70,19 @@ const EditPostModal = ({ id }) => {
         }
 
     };
+
+    //Reset input function
+    const resetForm = () => {
+        setTimeout(() => {
+            title.current.value = "";
+            subtitle.current.value = "";
+            text.current.value = "";
+            author.current.value = "";
+            dispatch(clearCategories());
+            setFile(null)
+        }, 2000)
+
+    }
 
     return (
         <div className='d-flex justify-content-center'>
