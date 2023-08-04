@@ -1,0 +1,58 @@
+.myBgDetailImg {
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
+}
+
+h1 {
+    color: #494949;
+    font-weight: lighter !important;
+    border-left: 5px solid #14a7ad;
+}
+
+.myBody>p:first-child {
+    font-size: 1.6rem;
+    font-weight: lighter;
+    font-style: italic;
+}
+article{
+    font-size: 1.3rem;
+}
+.drop-cap::first-letter {
+    -webkit-initial-letter: 4;
+    initial-letter: 4;
+    color: #14a7ad;
+    font-weight: 400;
+    margin-right: .75em;
+}
+.categorySymbol{
+    font-size: 3.5rem;
+    position: absolute;
+    top: 365px;
+    margin-left: 20px;
+}
+.modifyPostSymbol > i{
+    font-size: 1.4rem;
+    cursor: pointer;
+    z-index: 8;
+}
+.modifyPostSymbol > i:hover{
+    transform: translateY(1px);
+    transition: .2s ease-in-out .1s;
+}
+
+/* edit modal */
+
+.myEditModal{
+    top: 80px;
+    max-height: 90vh;
+    min-width: 75vw;
+    max-width: 92vw;
+    z-index: 9; /* .modifyPostSymbol => zIndex: 8 */
+    box-shadow: 4px 4px 20px rgb(139, 139, 139);
+    overflow-y: scroll;
+}
+.mainImage > img{
+    max-width: 50%;
+}
