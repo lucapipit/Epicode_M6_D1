@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddPost from './pages/AddPost';
 import {ProtectedRoutes} from './middlewares/ProtectedRoutes';
 import SinglePost from './pages/SinglePost';
+import Success from './pages/Success';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='logIn' element={<LogIn />} />
+        <Route path='success' element={<Success />} />
         <Route path='SinglePost/:id' element={<SinglePost />} />
 
         <Route element={<ProtectedRoutes/>}>

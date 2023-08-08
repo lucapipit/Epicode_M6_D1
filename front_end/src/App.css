@@ -104,19 +104,23 @@ i.bi-x-circle{
 
 /* LogIn Page */
 .myLogInForm{
-  height: 70vh;
-  background-size: cover;
-  background-position: left;
+  height: 92vh;
+  background-size: cover !important;
+  background-position: right !important;
 }
 .myLogInForm > div{
   width: 70%;
   height: 50vh;
-  background-color: rgba(248, 248, 248, 0.832);
+  background-color: rgba(248, 248, 248, 0.927);
   border-radius: 10px;
+  z-index: 9;
 }
 .myLogInForm input{
   margin-top: 20px;
   border-radius: 5px;
   border: 1px solid rgb(195, 195, 195);
   padding: 5px 10px
+}
+.githubImg{
+  height: 20px;
 }

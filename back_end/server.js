@@ -13,6 +13,8 @@ const loginRoutes = require("./routes/login");
 const dbProvaRoutes = require("./routes/dbProva");
 const postRoutes = require("./routes/posts");
 const commentRouter = require("./routes/comments")
+const githubRoute = require("./routes/githubOauth");
+const googleRoute = require("./routes/googleOauth");
 const logger = require("./middlewares/logger");
 
 //middleware
@@ -25,6 +27,9 @@ app.use("/", loginRoutes);
 app.use("/", dbProvaRoutes);
 app.use("/", postRoutes);
 app.use("/", commentRouter);
+app.use("/", githubRoute);
+app.use("/", googleRoute);
+
 
 
 //connessione a MongoDB

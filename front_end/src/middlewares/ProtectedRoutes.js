@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 
 
 const auth = () => {
-    return localStorage.getItem("loginData").split('"')[1];
+    return localStorage.getItem("loginData")/* .split('"')[1] */;
 };
 console.log(auth());
 const useSession = () => {
