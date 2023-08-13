@@ -18,6 +18,7 @@ i{
 i.bi-x-circle{
   cursor: pointer;
 }
+/* bootstrap icons category */
 .bi-activity{/* cardiology */
   color: rgb(255, 111, 0);
 }
@@ -33,6 +34,17 @@ i.bi-x-circle{
 .bi-fingerprint{/* biotecnology */
   color: #8c14ad;
 }
+/* bootstrap icons welcome hours */
+.bi-moon-fill{
+  color: #0c5778;
+}
+.bi-brightness-alt-high-fill{
+  color: #e98400 ;
+}
+.bi-brightness-high-fill{
+  color: #a59414 ;
+}
+
 
 /* posts */
 .myPostCard{
@@ -102,6 +114,26 @@ i.bi-x-circle{
   border-left: 5px solid #14a7ad;
 }
 
+/* homepage user detail info */
+.detailUserBar{
+  border-bottom: 1px solid #d5d5d5;
+  background-color: #eaeaea;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  padding: 0 10px;
+  font-weight: 400;
+}
+.detailUserBar .logout_bar{
+  cursor: pointer;
+}
+.detailUserBar .logout_bar:hover{
+  color: rgb(85, 0, 0) !important;
+  transition: color .2s ease-in-out .1s;
+}
+.providerIcon{
+  height: 13px;
+}
+
 /* LogIn Page */
 .myLogInForm{
   height: 92vh;
@@ -110,8 +142,8 @@ i.bi-x-circle{
 }
 .myLogInForm > div{
   width: 70%;
-  height: 50vh;
-  background-color: rgba(248, 248, 248, 0.927);
+  height: 60vh;
+  background-color: rgba(248, 248, 248, 0.961);
   border-radius: 10px;
   z-index: 9;
 }

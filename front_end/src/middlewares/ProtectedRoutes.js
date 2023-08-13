@@ -7,17 +7,16 @@ import jwtDecode from "jwt-decode";
 const auth = () => {
     return localStorage.getItem("loginData")/* .split('"')[1] */;
 };
-console.log(auth());
 const useSession = () => {
     const session = auth();
     console.log(session);
-    const decodeSession = session?jwtDecode(session):null
+    const decodeSession = session ? jwtDecode(session, process.env.JWT_SECRET) : null;
     console.log(decodeSession);
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        if(!session){
-            navigate("/LogIn", {replace: true})
+    useEffect(() => {
+        if (!session) {
+            navigate("/LogIn", { replace: true })
         }
     }, [navigate, session])
 
@@ -26,9 +25,9 @@ const useSession = () => {
 
 const ProtectedRoutes = () => {
     const isAuthorized = auth();
-   const session = useSession();
+    const session = useSession();
 
-    return session?<Outlet/>:<LogIn/>
+    return session ? <Outlet /> : <LogIn />
 }
 
-export {ProtectedRoutes}
+export { ProtectedRoutes }

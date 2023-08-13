@@ -30,17 +30,17 @@ login.post("/login", async (req, res) => {
     const token = jwt.sign({
         name: user.name,
         surname: user.surname,
-        email: user.email,
-        avatar: user.avatar,
-        dob: user.dob
-    }, process.env.JWT_SECRET, {expiresIn: "24h"});
+        /* email: user.email,
+        dob: user.dob, */
+        avatar: user.avatar
+    }, process.env.JWT_SECRET, {expiresIn: "3h"});
 
     
     res.header("Authorization", token).status(200).send({
         statusCode: 200,
         token,
         message: "Login effettuato con successo!",
-        payload: user
+        payload: `${user.name} ${user.surname}`
     })
 
 })

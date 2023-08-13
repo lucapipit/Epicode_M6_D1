@@ -24,9 +24,9 @@ const internalStorage = multer.diskStorage({
 const uploads = multer({ storage: internalStorage });
 
 
-router.post("/posts/internalUpload", uploads.single("img"), async(req, res) => {
+router.post("/posts/internalUpload", uploads.single("img"), async (req, res) => {
     try {
-        res.status(200).json({img: req.file.filename})
+        res.status(200).json({ img: req.file.filename })
     } catch (error) {
         res.status(500).send({
             statusCode: 500,
@@ -41,7 +41,7 @@ router.post("/posts/internalUpload", uploads.single("img"), async(req, res) => {
 router.get("/posts", async (req, res) => {
     try {
         console.log(req.header("Authorization"));
-        const allPosts = await postModel.find()
+        const allPosts = await postModel.find().sort({ createdAt: 'desc' })
             .populate("author")
             .populate("comments")
 
@@ -59,7 +59,7 @@ router.get("/posts", async (req, res) => {
 
 //GET ALL BY ID
 router.get("/posts/:id", async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     try {
         console.log(req.header("Authorization"));
         const singlePost = await postModel.findById(id)

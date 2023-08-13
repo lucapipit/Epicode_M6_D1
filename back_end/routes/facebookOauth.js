@@ -1,22 +1,22 @@
 const express = require("express");
-const google = express.Router();
+const facebook = express.Router();
 const passport = require("passport");
 const session = require("express-session");
 const jwt = require("jsonwebtoken");
-const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const FacebookStrategy = require("passport-facebook");
 require("dotenv").config();
 
 
-google.use(
+facebook.use(
     session({
-        secret: process.env.GOOGLE_SECRETKEY,
+        secret: process.env.FACEBOOK_SECRETKEY,
         resave: false,
         saveUninitialized: false
     })
 );
 
-google.use(passport.initialize());
-google.use(passport.session());
+facebook.use(passport.initialize());
+facebook.use(passport.session());
 
 //serializzazione e deserializzazione dell'utente
 
@@ -29,11 +29,11 @@ passport.deserializeUser((user, done) => {
 })
 
 passport.use(
-    new GoogleStrategy(
+    new FacebookStrategy(
         {
-            clientID: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_SECRETKEY,
-            callbackURL: process.env.GOOGLE_CALLBACK_URL
+            clientID: process.env.FACEBOOK_CLIENT_ID,
+            clientSecret: process.env.FACEBOOK_SECRETKEY,
+            callbackURL: process.env.FACEBOOK_CALLBACK_URL
         }, (accessToken, refreshToken, profile, done) => {
             return done(null, profile)
         }
@@ -42,23 +42,22 @@ passport.use(
 
 //creazione delle rotte
 
-google.get("/auth/google", passport.authenticate("google", { scope : ['profile', 'email'] }), (req, res) => {
+facebook.get("/auth/facebook", passport.authenticate("facebook", { scope: [ 'public_profile,email' ] }), (req, res) => {
     const redirectUrl = `http://localhost:3000/success?user=${encodeURIComponent(JSON.stringify(req.user))}`;
-    console.log(req);
     res.redirect(redirectUrl)
 });
 
-google.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/error" }), (req, res) => {
+facebook.get("/auth/facebook/callback", passport.authenticate("facebook", { failureRedirect: "/error" }), (req, res) => {
     const { user } = req;
-   /*  console.log(req.user.displayName); */
-    const myUser = { displayName: user.displayName, provider: "Google"};
-    const token = jwt.sign(myUser, process.env.JWT_SECRET);
+    console.log(req.user);
+
+    const token = jwt.sign(user, process.env.JWT_SECRET);
     const redirectUrl = `http://localhost:3000/success?token=${encodeURIComponent(token)}`;
     res.redirect(redirectUrl)
 });
 
-google.get("/success", (req, res) => {
+facebook.get("/success", (req, res) => {
     res.redirect("http://localhost:3000/")
 });
 
-module.exports = google
+module.exports = facebook

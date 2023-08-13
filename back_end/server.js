@@ -15,6 +15,7 @@ const postRoutes = require("./routes/posts");
 const commentRouter = require("./routes/comments")
 const githubRoute = require("./routes/githubOauth");
 const googleRoute = require("./routes/googleOauth");
+const facebookRoute = require("./routes/facebookOauth");
 const logger = require("./middlewares/logger");
 
 //middleware
@@ -29,6 +30,7 @@ app.use("/", postRoutes);
 app.use("/", commentRouter);
 app.use("/", githubRoute);
 app.use("/", googleRoute);
+app.use("/", facebookRoute);
 
 
 
