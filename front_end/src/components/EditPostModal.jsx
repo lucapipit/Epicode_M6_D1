@@ -19,11 +19,11 @@ const EditPostModal = ({ id }) => {
 
     const [file, setFile] = useState(null);
     const [isSending, setIsSending] = useState(false);
+    /* input form values */
     const img = singlePost.img;
-    const title = singlePost.title;
-    const subtitle = singlePost.subtitle;
-    const text = singlePost.text;
-    const author = singlePost.title;
+    const [title, setTitle] = useState(singlePost.title);
+    const [subtitle, setSubtitle] = useState(singlePost.subtitle);
+    const [text, setText] = useState(singlePost.text);
 
     const uploadFile = async (file) => {
         const fileData = new FormData();
@@ -40,22 +40,21 @@ const EditPostModal = ({ id }) => {
             console.error("file upload errors occured");
         }
     };
-
+    
     const submitForm = async (e) => {
         e.preventDefault();
-        console.log(title.current.value, subtitle.current.value, text.current.value, author.current.value, file);
         try {
-            const uploadedFile = await uploadFile(file);
+           /*  const uploadedFile = await uploadFile(file); */
 
             const myPayload = {
-                title: title.current.value,
-                subtitle: subtitle.current.value,
-                author: author.current.value,
-                img: uploadedFile.img,
-                text: text.current.value,
-                tags: categories
+                title: title,
+                subtitle: subtitle,
+                /* img: uploadedFile.img, */
+                text: text
             };
-            const response = await fetch(`${process.env.REACT_APP_SERVERBASE_URL}/posts`, {
+
+            console.log(myPayload);
+            const response = await fetch(`${process.env.REACT_APP_SERVERBASE_URL}/posts/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -71,18 +70,7 @@ const EditPostModal = ({ id }) => {
 
     };
 
-    //Reset input function
-    const resetForm = () => {
-        setTimeout(() => {
-            title.current.value = "";
-            subtitle.current.value = "";
-            text.current.value = "";
-            author.current.value = "";
-            dispatch(clearCategories());
-            setFile(null)
-        }, 2000)
-
-    }
+    
 
     return (
         <div className='d-flex justify-content-center'>
@@ -95,11 +83,11 @@ const EditPostModal = ({ id }) => {
                     </div>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="inputGroup-sizing-default">Title</InputGroup.Text>
-                        <Form.Control value={title}/>
+                        <Form.Control value={title} onChange={(e)=>{setTitle(e.target.value)}}/>
                     </InputGroup>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="inputGroup-sizing-default">Subtitle</InputGroup.Text>
-                        <Form.Control value={subtitle}/>
+                        <Form.Control value={subtitle} onChange={(e)=>{setSubtitle(e.target.value)}}/>
                     </InputGroup>
                     <div className='d-flex align-items-center mb-3'>
                         <DropdownButton align="start" title="Category" id="dropdown-menu-align-end" variant="info">
@@ -127,12 +115,12 @@ const EditPostModal = ({ id }) => {
                     </div>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="inputGroup-sizing-default">Text</InputGroup.Text>
-                        <Form.Control as="textarea" rows={20} value={text} />
+                        <Form.Control as="textarea" rows={20} value={text} onChange={(e)=>{setText(e.target.value)}}/>
                     </InputGroup>
                     <div className=' d-flex justify-content-center'>
                         {isSending ?
                             <Button variant="primary" disabled><Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" /> Loading... </Button>
-                            : <Button onClick={(e) => { submitForm(e); resetForm() }}><i class="bi bi-check-circle-fill me-2"></i>Update</Button>}
+                            : <Button onClick={(e) => { submitForm(e)}}><i class="bi bi-check-circle-fill me-2"></i>Update</Button>}
                     </div>
                 </form>
 

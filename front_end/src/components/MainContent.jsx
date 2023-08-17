@@ -34,6 +34,11 @@ const MainContent = () => {
         else { return <i class="bi bi-moon-fill"> Good night</i> };
     }
 
+    //logout
+    const myLogout = () => {
+        localStorage.clear();
+        return window.location.replace("http://localhost:3000/")
+    }
 
 
     //pagination hooks
@@ -77,13 +82,18 @@ const MainContent = () => {
                     {userFullName.displayName ? userFullName.displayName : userFullName.name + " " + userFullName.surname}
                     {userFullName.provider ? (userFullName.provider === "Google" ? <img className='providerIcon ms-2' src={googleIcon} alt="img" /> : <img className='providerIcon ms-2' src={githubIcon} alt="img" />) : null}
                 </div>
-                <div><i className='text-danger logout_bar'>Logout</i></div>
+                <div>
+                    <i className='text-danger logout_bar bi bi-box-arrow-left' onClick={() => myLogout()} > Logout</i>
+                </div>
             </div> : null}
 
             <h2 className='mt-3 ps-1 myTitles'>Medical News</h2>
-            <Link className='myLink' to="AddPost">
-                <i class="bi bi-plus-lg me-2"> Add Post</i>
-            </Link>
+
+            <div className="contentToolBar py-2 px-3 rounded-5">
+                <Link className='myLink rounded-5 py-1 px-2 ' to="AddPost">
+                    <i class="bi bi-plus-lg me-2"> Add Post</i>
+                </Link>
+            </div>
             <div className='row mt-3 justify-content-center'>
                 {
                     allPosts && allPosts.map((el) => {

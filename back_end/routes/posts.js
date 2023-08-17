@@ -87,8 +87,6 @@ router.post("/posts", async (req, res) => {
         subtitle: req.body.subtitle,
         text: req.body.text,
         img: req.body.img,
-        author: req.body.author,
-        tags: req.body.tags
     });
 
     const myNewPost = newPost.save();

@@ -13,7 +13,7 @@ const SinglePost = () => {
     useEffect(() => {
         dispatch(getPostByIdFunc(id))
     }, []);
-    console.log(singlePost);
+    /* console.log(singlePost); */
     return (
         <>
             <MainLayout>

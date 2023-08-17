@@ -2,6 +2,7 @@ import './App.css';
 import Homepage from './pages/Homepage';
 import ErrorPage from './pages/ErrorPage';
 import LogIn from './pages/LogIn';
+import SignIn from './pages/SignIn';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddPost from './pages/AddPost';
 import {ProtectedRoutes} from './middlewares/ProtectedRoutes';
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='logIn' element={<LogIn />} />
+        <Route path='signin' element={<SignIn />} />
         <Route path='success' element={<Success />} />
         <Route path='SinglePost/:id' element={<SinglePost />} />
 
